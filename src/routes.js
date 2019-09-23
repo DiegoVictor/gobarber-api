@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import Multer from 'multer';
 import Auth from './app/middlewares/auth';
+
+import storage from './config/storage';
+
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
@@ -9,22 +12,30 @@ import AppointmentController from './app/controllers/AppointmentController';
 import NotificationController from './app/controllers/NotificationController';
 import ScheduleController from './app/controllers/ScheduleController';
 import AvailableController from './app/controllers/AvailableController';
-import storage from './config/storage';
+
+import UserStoreValidation from './app/validators/UserStore';
+import UserUpdateValidation from './app/validators/UserUpdate';
+import SessionStoreValidation from './app/validators/SessionStore';
+import AppointmentStoreValidation from './app/validators/AppointmentStore';
 
 const Route = new Router();
 
-Route.post('/sessions', SessionController.store);
-Route.post('/users', UserController.store);
+Route.post('/sessions', SessionStoreValidation, SessionController.store);
+Route.post('/users', UserStoreValidation, UserController.store);
 
 Route.use(Auth);
 
 Route.get('/providers', ProviderController.index);
 Route.get('/providers/:id/available', AvailableController.index);
 
-Route.put('/users', UserController.update);
+Route.put('/users', UserUpdateValidation, UserController.update);
 
 Route.get('/appointments', AppointmentController.index);
-Route.post('/appointments', AppointmentController.store);
+Route.post(
+  '/appointments',
+  AppointmentStoreValidation,
+  AppointmentController.store
+);
 Route.delete('/appointments/:id', AppointmentController.delete);
 
 Route.post('/files', Multer(storage).single('file'), FileController.store);
