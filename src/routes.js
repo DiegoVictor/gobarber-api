@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import Brute from 'express-brute';
+import BruteRedis from 'express-brute-redis';
 import Multer from 'multer';
 import Auth from './app/middlewares/auth';
 
@@ -19,8 +21,19 @@ import SessionStoreValidation from './app/validators/SessionStore';
 import AppointmentStoreValidation from './app/validators/AppointmentStore';
 
 const Route = new Router();
+const brute_force = new Brute(
+  new BruteRedis({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+  })
+);
 
-Route.post('/sessions', SessionStoreValidation, SessionController.store);
+Route.post(
+  '/sessions',
+  brute_force.prevent,
+  SessionStoreValidation,
+  SessionController.store
+);
 Route.post('/users', UserStoreValidation, UserController.store);
 
 Route.use(Auth);
