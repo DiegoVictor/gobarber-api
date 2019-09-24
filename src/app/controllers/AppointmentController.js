@@ -3,10 +3,18 @@ import User from '../models/User';
 import File from '../models/File';
 import CreateAppointmentService from '../services/CreateAppointmentService';
 import CancelAppointmentService from '../services/CancelAppointmentService';
+import Cache from '../../lib/Cache';
 
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
+    const key = `user:${req.user_id}:appointments:${page}`;
+    const cached = await Cache.get(key);
+
+    if (cached) {
+      return res.json(cached);
+    }
+
     const appointments = await Appointment.findAll({
       where: { user_id: req.user_id, canceled_at: null },
       order: ['date'],
@@ -28,6 +36,8 @@ class AppointmentController {
         },
       ],
     });
+
+    await Cache.set(key, appointments);
     return res.json(appointments);
   }
 
