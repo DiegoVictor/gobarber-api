@@ -4,6 +4,7 @@ import User from '../models/User';
 import Appointment from '../models/Appointment';
 import Notification from '../schemas/Notification';
 import Cache from '../../lib/Cache';
+import HttpError from '../../lib/HttpError';
 
 class CreateAppointmentService {
   async run({ provider_id, user_id, date }) {
@@ -11,7 +12,7 @@ class CreateAppointmentService {
      * Prevent provider to create an appointment with itself
      */
     if (provider_id === user_id) {
-      throw new Error("You can't create appointments with yourself");
+      throw new HttpError("You can't create appointments with yourself", 401);
     }
 
     /**
@@ -22,7 +23,10 @@ class CreateAppointmentService {
     });
 
     if (!is_provider) {
-      throw new Error('You can only create appointments with providers');
+      throw new HttpError(
+        'You can only create appointments with providers',
+        401
+      );
     }
 
     /**
@@ -30,7 +34,7 @@ class CreateAppointmentService {
      */
     const hour_start = startOfHour(parseISO(date));
     if (isBefore(hour_start, new Date())) {
-      throw new Error('Past dates are not permited');
+      throw new HttpError('Past dates are not permited', 400);
     }
 
     /**
@@ -40,7 +44,7 @@ class CreateAppointmentService {
       where: { provider_id, canceled_at: null, date: hour_start },
     });
     if (check_availability) {
-      throw new Error('Appointment date is not available');
+      throw new HttpError('Appointment date is not available', 400);
     }
 
     const appointment = await Appointment.create({

@@ -13,6 +13,7 @@ import sentry from './config/sentry';
 import routes from './routes';
 
 import './database';
+import HttpError from './lib/HttpError';
 
 class App {
   constructor() {
@@ -64,8 +65,16 @@ class App {
     this.server.use(async (err, req, res, next) => {
       if (process.env.NODE_ENV === 'development') {
         const errors = await new Youch(err, req).toJSON();
-        return res.status(500).json(errors);
+
+        switch (true) {
+          case err instanceof HttpError:
+            return res.status(err.code).json(errors);
+
+          default:
+            return res.status(500).json(errors);
+        }
       }
+
       return res.status(500).json({
         error: 'Internal server error',
       });

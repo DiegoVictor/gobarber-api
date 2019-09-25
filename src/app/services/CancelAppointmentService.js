@@ -4,6 +4,7 @@ import User from '../models/User';
 import Queue from '../../lib/Queue';
 import CancellationMail from '../jobs/CancellationMail';
 import Cache from '../../lib/Cache';
+import HttpError from '../../lib/HttpError';
 
 class CancelAppointmentService {
   async run({ provider_id, user_id }) {
@@ -23,12 +24,18 @@ class CancelAppointmentService {
     });
 
     if (appointment.user_id !== user_id) {
-      throw new Error("You don't have permission to cancel this appointment");
+      throw new HttpError(
+        "You don't have permission to cancel this appointment",
+        401
+      );
     }
 
     const limit_to_cancel = subHours(appointment.date, 2);
     if (isBefore(limit_to_cancel, new Date())) {
-      throw new Error('You can only cancel appointments 2 hours in advance');
+      throw new HttpError(
+        'You can only cancel appointments 2 hours in advance',
+        400
+      );
     }
 
     appointment.canceled_at = new Date();
