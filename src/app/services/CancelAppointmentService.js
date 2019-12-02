@@ -1,4 +1,5 @@
 import { isBefore, subHours } from 'date-fns';
+
 import Appointment from '../models/Appointment';
 import User from '../models/User';
 import Queue from '../../lib/Queue';

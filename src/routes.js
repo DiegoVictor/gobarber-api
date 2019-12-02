@@ -2,8 +2,8 @@ import { Router } from 'express';
 import Brute from 'express-brute';
 import BruteRedis from 'express-brute-redis';
 import Multer from 'multer';
-import Auth from './app/middlewares/auth';
 
+import Auth from './app/middlewares/auth';
 import storage from './config/storage';
 
 import UserController from './app/controllers/UserController';

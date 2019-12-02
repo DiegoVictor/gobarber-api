@@ -2,6 +2,7 @@ import Nodemailer from 'nodemailer';
 import exphbs from 'express-handlebars';
 import nodemailerhbs from 'nodemailer-express-handlebars';
 import { resolve } from 'path';
+
 import mail from '../config/mail';
 
 class Mail {

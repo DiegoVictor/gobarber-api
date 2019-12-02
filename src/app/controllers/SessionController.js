@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
+
 import User from '../models/User';
 import File from '../models/File';
-
 import { SECRET, EXPIRATION_TIME } from '../../config/auth';
 
 class SessionController {

@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import Mongoose from 'mongoose';
+
 import postgres from '../config/postgres';
 
 import User from '../app/models/User';

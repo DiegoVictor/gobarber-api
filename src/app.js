@@ -9,9 +9,9 @@ import helmet from 'helmet';
 import redis from 'redis';
 import Limit from 'express-rate-limit';
 import LimitRedis from 'rate-limit-redis';
+
 import sentry from './config/sentry';
 import routes from './routes';
-
 import './database';
 import HttpError from './lib/HttpError';
 
