@@ -1,0 +1,8 @@
+node_modules
+dist
+tmp/uploads
+coverage
+.vscode
+
+!tmp/uploads/.gitkeep
+.env
