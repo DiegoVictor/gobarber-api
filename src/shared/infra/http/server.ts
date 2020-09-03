@@ -8,6 +8,7 @@ import { errors } from 'celebrate';
 
 import AppError from '@shared/errors/AppError';
 import uploadConfiguration from '@config/upload';
+import routes from './routes';
 import rateLimiter from './middlewares/RateLimiter';
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(helmet());
 app.use(express.json());
 app.use('/uploads', express.static(uploadConfiguration.uploadsDirectory));
 app.use(rateLimiter);
+app.use(routes);
 
 app.use(errors());
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
