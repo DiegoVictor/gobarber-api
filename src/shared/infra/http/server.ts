@@ -6,12 +6,14 @@ import helmet from 'helmet';
 import { errors } from 'celebrate';
 
 import AppError from '@shared/errors/AppError';
+import uploadConfiguration from '@config/upload';
 
 const app = express();
 
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use('/uploads', express.static(uploadConfiguration.uploadsDirectory));
 
 app.use(errors());
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
