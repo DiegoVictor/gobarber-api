@@ -6,6 +6,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { errors } from 'celebrate';
 
+import '@shared/container';
 import AppError from '@shared/errors/AppError';
 import uploadConfiguration from '@config/upload';
 import routes from './routes';
