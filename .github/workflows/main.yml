@@ -25,3 +25,6 @@ jobs:
       run: yarn
     - name: Run build
       run: yarn test
+    - uses: codecov/codecov-action@v1
+      with:
+        directory: ./coverage/
