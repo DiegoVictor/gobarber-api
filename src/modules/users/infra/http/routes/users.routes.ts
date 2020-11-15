@@ -3,7 +3,6 @@ import multer from 'multer';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
-
 import uploadConfig from '@config/upload';
 import UsersController from '../controllers/UsersController';
 import UserAvatarController from '../controllers/UserAvatarController';
