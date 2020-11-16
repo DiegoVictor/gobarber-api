@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 } from 'uuid';
 import { isEqual, getMonth, getYear, getDate } from 'date-fns';
 
 import Appointment from '../../infra/typeorm/entities/Appointment';
@@ -17,7 +17,7 @@ class FakeAppointmentsRepository implements IAppointmentsRepository {
   }: ICreateAppoitmentDTO): Promise<Appointment> {
     const appointment = new Appointment();
 
-    Object.assign(appointment, { id: uuid(), date, provider_id, user_id });
+    Object.assign(appointment, { id: v4(), date, provider_id, user_id });
 
     this.appointments.push(appointment);
     return appointment;
