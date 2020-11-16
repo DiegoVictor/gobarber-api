@@ -1,8 +1,8 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import SendForgotPasswordEmailService from '@modules/users/services/SendForgotPasswordEmailService';
 import AppError from '@shared/errors/AppError';
 import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
-import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
+import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
 
 describe('SendForgotPasswordEmail', () => {
   let fakeUsersRepository: FakeUsersRepository;

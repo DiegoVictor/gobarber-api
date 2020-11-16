@@ -1,8 +1,8 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import ResetPasswordService from './ResetPasswordService';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import ResetPasswordService from '@modules/users/services/ResetPasswordService';
 import AppError from '@shared/errors/AppError';
-import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
+import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 
 describe('ResetPassowrd', () => {
   let fakeUsersRepository: FakeUsersRepository;

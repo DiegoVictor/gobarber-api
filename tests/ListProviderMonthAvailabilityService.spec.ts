@@ -1,5 +1,5 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
-import ListProviderMonthAvailabilityService from './ListProviderMonthAvailabilityService';
+import ListProviderMonthAvailabilityService from '@modules/appointments/services/ListProviderMonthAvailabilityService';
 
 describe('ListProviderMonthAvailabilityService', () => {
   let fakeAppointmentsRepository: FakeAppointmentsRepository;
@@ -8,7 +8,7 @@ describe('ListProviderMonthAvailabilityService', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
     listProviderMonthAvailability = new ListProviderMonthAvailabilityService(
-      fakeAppointmentsRepository
+      fakeAppointmentsRepository,
     );
   });
 
@@ -23,7 +23,7 @@ describe('ListProviderMonthAvailabilityService', () => {
           provider_id,
           user_id,
           date: new Date(2020, 6, 20, i, 0, 0),
-        })
+        }),
       );
     }
     Promise.all(appointments);
@@ -43,7 +43,7 @@ describe('ListProviderMonthAvailabilityService', () => {
         { day: 19, available: true },
         { day: 20, available: false },
         { day: 21, available: true },
-      ])
+      ]),
     );
   });
 });

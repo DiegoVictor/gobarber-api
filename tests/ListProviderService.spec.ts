@@ -1,5 +1,5 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
-import ListProviderService from './ListProviderService';
+import ListProviderService from '@modules/appointments/services/ListProviderService';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 describe('UpdateProfileService', () => {

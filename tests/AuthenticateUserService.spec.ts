@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import AuthenticateUserService from './AuthenticateUserService';
+import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
 describe('AuthenticateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository;

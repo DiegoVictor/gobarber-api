@@ -1,6 +1,6 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AppError from '@shared/errors/AppError';
-import ShowProfileService from './ShowProfileService';
+import ShowProfileService from '@modules/users/services/ShowProfileService';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;

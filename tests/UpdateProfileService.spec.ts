@@ -1,7 +1,7 @@
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
-import UpdateProfileService from './UpdateProfileService';
+import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
+import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;

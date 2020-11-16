@@ -1,5 +1,5 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
-import ListProviderAppointmentsService from './ListProviderAppointmentsService';
+import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 describe('ListProviderAppointmentsService', () => {
