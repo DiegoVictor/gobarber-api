@@ -10,7 +10,7 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.0
       with:
-        node-version: 12.x
+        node-version: 12.18.x
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -27,4 +27,4 @@ jobs:
       run: yarn test
     - uses: codecov/codecov-action@v1
       with:
-        directory: ./coverage/
+        directory: ./tests/coverage/
