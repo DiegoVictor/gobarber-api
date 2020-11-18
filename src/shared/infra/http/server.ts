@@ -12,6 +12,7 @@ import AppError from '@shared/errors/AppError';
 import uploadConfiguration from '@config/upload';
 import routes from './routes';
 import rateLimit from './middlewares/RateLimit';
+import routeAliases from './middlewares/RouteAliases';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(helmet());
 app.use(express.json());
 app.use('/uploads', express.static(uploadConfiguration.uploadsDirectory));
 app.use(rateLimit);
+app.use(routeAliases);
 app.use(routes);
 
 app.use(errors());
