@@ -14,8 +14,21 @@ class UsersRepository implements IUsersRepository {
 
   public async findAllProviders({
     except_user_id,
+    page,
+    take,
   }: IFindAllProvidersDTO): Promise<User[]> {
-    let users: User[];
+    if (except_user_id) {
+      return this.ormRepository.find({
+        where: { id: Not(except_user_id) },
+        take,
+        skip: take * (page - 1),
+      });
+    }
+    return this.ormRepository.find({
+      take,
+      skip: take * (page - 1),
+    });
+  }
 
   public async countProviders(except_user_id?: string): Promise<number> {
     if (except_user_id) {
