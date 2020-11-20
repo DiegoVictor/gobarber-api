@@ -1,7 +1,10 @@
+import faker from 'faker';
+
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
+import factory from '../utils/factory';
 
 describe('AuthenticateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -19,11 +22,10 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should be able to authenticate', async () => {
-    const email = 'johndoe@gmail.com';
-    const password = '79345794';
+    const { email, password, name } = await factory.attrs('User');
 
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
+      name,
       email,
       password,
     });
@@ -38,26 +40,29 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate with non existing user', async () => {
+    const { email, password } = await factory.attrs('User');
     await expect(
       authenticateUser.execute({
-        email: 'johndoe@gmail.com',
-        password: '79345794',
+        email,
+        password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to authenticate with wrong password', async () => {
-    const email = 'johndoe@gmail.com';
+    const { email, password, name } = await factory.attrs('User');
+    const newPassword = faker.internet.password();
+
     await fakeUsersRepository.create({
-      name: 'John Doe',
+      name,
       email,
-      password: '79345794',
+      password,
     });
 
     await expect(
       authenticateUser.execute({
         email,
-        password: '45637',
+        password: newPassword,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

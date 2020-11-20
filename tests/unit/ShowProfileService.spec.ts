@@ -1,6 +1,9 @@
+import faker from 'faker';
+
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AppError from '@shared/errors/AppError';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
+import factory from '../utils/factory';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -12,12 +15,11 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to show the profile', async () => {
-    const name = 'John Doe';
-    const email = 'johndoe@gmail.com';
+    const { email, password, name } = await factory.attrs('User');
     const user = await fakeUsersRepository.create({
       name,
       email,
-      password: '79345794',
+      password,
     });
 
     const profile = await showProfile.execute({ user_id: user.id });
@@ -28,7 +30,7 @@ describe('UpdateProfileService', () => {
 
   it('should not be able to show the profile from non existing user', async () => {
     await expect(
-      showProfile.execute({ user_id: '3874548' }),
+      showProfile.execute({ user_id: String(faker.random.number()) }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -1,8 +1,11 @@
+import faker from 'faker';
+
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ResetPasswordService from '@modules/users/services/ResetPasswordService';
 import AppError from '@shared/errors/AppError';
 import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
+import factory from '../utils/factory';
 
 describe('ResetPassowrd', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -23,52 +26,60 @@ describe('ResetPassowrd', () => {
   });
 
   it('should be able to reset the password', async () => {
+    const { email, password, name } = await factory.attrs('User');
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '789459349',
+      name,
+      email,
+      password,
     });
 
     const { token } = await fakeUserTokensRepository.generate(user.id);
 
     const generateHash = jest.spyOn(fakeHashProvider, 'generateHash');
 
-    const password = '7823832';
+    const newPassword = String(faker.random.number());
     await resetPassword.execute({
-      password,
+      password: newPassword,
       token,
     });
 
     const updatedUser = await fakeUsersRepository.findById(user.id);
 
-    expect(updatedUser?.password).toBe(password);
-    expect(generateHash).toHaveBeenCalledWith(password);
+    expect(updatedUser?.password).toBe(newPassword);
+    expect(generateHash).toHaveBeenCalledWith(newPassword);
   });
 
   it('should not be able to reset a password with non existing token', async () => {
+    const token = faker.random.alphaNumeric(16);
+    const password = faker.internet.password();
+
     await expect(
       resetPassword.execute({
-        token: '7234579848',
-        password: '85985',
+        token,
+        password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to reset a password with non existing user', async () => {
-    const { token } = await fakeUserTokensRepository.generate('287648');
+    const id = String(faker.random.number());
+    const { token } = await fakeUserTokensRepository.generate(id);
+    const password = faker.internet.password();
+
     await expect(
       resetPassword.execute({
         token,
-        password: '85985',
+        password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to reset the password if it expires', async () => {
+    const { email, password, name } = await factory.attrs('User');
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '789459349',
+      name,
+      email,
+      password,
     });
 
     const { token } = await fakeUserTokensRepository.generate(user.id);
@@ -78,7 +89,6 @@ describe('ResetPassowrd', () => {
       return customDate.setHours(customDate.getHours() + 3);
     });
 
-    const password = '7823832';
     await expect(
       resetPassword.execute({
         password,

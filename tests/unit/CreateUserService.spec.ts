@@ -3,6 +3,7 @@ import CreateUserService from '@modules/users/services/CreateUserService';
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
+import factory from '../utils/factory';
 
 describe('CreateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -23,28 +24,30 @@ describe('CreateUserService', () => {
   });
 
   it('should be able to create a new user', async () => {
+    const { email, password, name } = await factory.attrs('User');
     const user = await createUser.execute({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name,
+      email,
+      password,
     });
 
     expect(user).toHaveProperty('id');
   });
 
   it('should not be able to create a new user with an email already in use ', async () => {
-    const email = 'johndoe@gmail.com';
+    const { email, password, name } = await factory.attrs('User');
+
     await createUser.execute({
-      name: 'John Doe',
+      name,
       email,
-      password: '79345794',
+      password,
     });
 
     await expect(
       createUser.execute({
-        name: 'Jane Doe',
+        name,
         email,
-        password: '8927349',
+        password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

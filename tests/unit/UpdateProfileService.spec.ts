@@ -1,7 +1,10 @@
+import faker from 'faker';
+
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
+import factory from '../utils/factory';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -19,118 +22,109 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to update the profile', async () => {
+    const [user1, user2] = await factory.attrsMany('User', 2);
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name: user1.name,
+      email: user1.email,
+      password: user1.password,
     });
 
-    const name = 'Jane Doe';
-    const email = 'janedoe@gmail.com';
     const updatedUser = await updateProfile.execute({
       user_id: user.id,
-      name,
-      email,
+      name: user2.name,
+      email: user2.email,
     });
 
-    expect(updatedUser.name).toBe(name);
-    expect(updatedUser.email).toBe(email);
+    expect(updatedUser.name).toBe(user2.name);
+    expect(updatedUser.email).toBe(user2.email);
   });
 
   it('should not be able to change to another user email', async () => {
-    const email = 'johndoe@gmail.com';
+    const [user1, user2] = await factory.attrsMany('User', 2);
     await fakeUsersRepository.create({
-      name: 'John Doe',
-      email,
-      password: '79345794',
+      name: user1.name,
+      email: user1.email,
+      password: user1.password,
     });
 
     const user = await fakeUsersRepository.create({
-      name: 'Jane Doe',
-      email: 'janedoe@gmail.com',
-      password: '97347954',
+      name: user2.name,
+      email: user2.email,
+      password: user2.password,
     });
 
     await expect(
       updateProfile.execute({
-        name: 'Jonh Doe',
+        name: user1.name,
         user_id: user.id,
-        email,
+        email: user1.email,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should be able to update the password', async () => {
-    const password = '79345794';
+    const [user1, user2] = await factory.attrsMany('User', 2);
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password,
+      name: user1.name,
+      email: user1.email,
+      password: user1.password,
     });
 
-    const name = 'Jane Doe';
-    const email = 'janedoe@gmail.com';
-    const new_password = '238742378';
     const updatedUser = await updateProfile.execute({
       user_id: user.id,
-      name,
-      email,
-      old_password: password,
-      password: new_password,
+      name: user2.name,
+      email: user2.email,
+      old_password: user1.password,
+      password: user2.password,
     });
 
-    expect(updatedUser.password).toBe(new_password);
+    expect(updatedUser.password).toBe(user2.password);
   });
 
   it('should not be able to update the password without old password', async () => {
+    const [user1, user2] = await factory.attrsMany('User', 2);
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name: user1.name,
+      email: user1.email,
+      password: user1.password,
     });
-
-    const name = 'Jane Doe';
-    const email = 'janedoe@gmail.com';
-    const new_password = '238742378';
 
     await expect(
       updateProfile.execute({
         user_id: user.id,
-        name,
-        email,
-        password: new_password,
+        name: user2.name,
+        email: user2.email,
+        password: user2.password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to update the password with wrong password', async () => {
+    const [user1, user2] = await factory.attrsMany('User', 2);
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name: user1.name,
+      email: user1.email,
+      password: user1.password,
     });
-
-    const name = 'Jane Doe';
-    const email = 'janedoe@gmail.com';
-    const new_password = '238742378';
 
     await expect(
       updateProfile.execute({
         user_id: user.id,
-        name,
-        email,
-        old_password: '289792',
-        password: new_password,
+        name: user2.name,
+        email: user2.email,
+        old_password: user2.password,
+        password: user2.password,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to update the profile from non existing user', async () => {
+    const { name, email } = await factory.attrs('User');
     await expect(
       updateProfile.execute({
-        user_id: '3874548',
-        name: 'John Doe',
-        email: 'johndoe@gmail.com',
+        user_id: String(faker.random.number()),
+        name,
+        email,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
