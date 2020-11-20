@@ -17,15 +17,13 @@ class UsersRepository implements IUsersRepository {
   }: IFindAllProvidersDTO): Promise<User[]> {
     let users: User[];
 
+  public async countProviders(except_user_id?: string): Promise<number> {
     if (except_user_id) {
-      users = await this.ormRepository.find({
+      return this.ormRepository.count({
         where: { id: Not(except_user_id) },
       });
-    } else {
-      users = await this.ormRepository.find();
     }
-
-    return users;
+    return this.ormRepository.count();
   }
 
   public async findById(id: string): Promise<User | undefined> {
