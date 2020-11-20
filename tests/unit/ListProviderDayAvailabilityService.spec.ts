@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import ListProviderDayAvailabilityService from '@modules/appointments/services/ListProviderDayAvailabilityService';
 
@@ -13,8 +15,8 @@ describe('ListProviderDayAvailabilityService', () => {
   });
 
   it('should be able to list the day availability from provider', async () => {
-    const provider_id = '35345345';
-    const user_id = '8943594';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
 
     await fakeAppointmentsRepository.create({
       provider_id,

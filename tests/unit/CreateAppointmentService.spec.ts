@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 import AppError from '@shared/errors/AppError';
@@ -26,8 +28,8 @@ describe('CreateAppointmentService', () => {
       return new Date(2020, 4, 10, 12).getTime();
     });
 
-    const provider_id = '7497349';
-    const user_id = '289734283';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
     const appointment = await createAppointment.execute({
       date: new Date(2020, 4, 10, 13),
       provider_id,
@@ -44,8 +46,8 @@ describe('CreateAppointmentService', () => {
     });
 
     const date = new Date(2020, 4, 10, 15);
-    const provider_id = '7497349';
-    const user_id = '289734283';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
 
     await createAppointment.execute({
       date,
@@ -67,8 +69,8 @@ describe('CreateAppointmentService', () => {
       return new Date(2020, 4, 10, 12).getTime();
     });
 
-    const provider_id = '7497349';
-    const user_id = '289734283';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
     await expect(
       createAppointment.execute({
         date: new Date(2020, 4, 10, 11),
@@ -83,7 +85,7 @@ describe('CreateAppointmentService', () => {
       return new Date(2020, 4, 10, 12).getTime();
     });
 
-    const user_id = '289734283';
+    const user_id = String(faker.random.number());
     await expect(
       createAppointment.execute({
         date: new Date(2020, 4, 10, 13),
@@ -98,8 +100,8 @@ describe('CreateAppointmentService', () => {
       return new Date(2020, 4, 10, 12).getTime();
     });
 
-    const user_id = '289734283';
-    const provider_id = '7497349';
+    const user_id = String(faker.random.number());
+    const provider_id = String(faker.random.number());
     await expect(
       createAppointment.execute({
         date: new Date(2020, 4, 11, 7),

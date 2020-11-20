@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import ListProviderMonthAvailabilityService from '@modules/appointments/services/ListProviderMonthAvailabilityService';
 
@@ -13,8 +15,8 @@ describe('ListProviderMonthAvailabilityService', () => {
   });
 
   it('should be able to list the month availability from provider', async () => {
-    const provider_id = '35345345';
-    const user_id = '289734283';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
 
     const appointments = [];
     for (let i = 8; i < 18; i++) {

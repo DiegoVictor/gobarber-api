@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
@@ -17,8 +19,8 @@ describe('ListProviderAppointmentsService', () => {
   });
 
   it('should be able to list the appointments on a specific day', async () => {
-    const provider_id = '35345345';
-    const user_id = '289734283';
+    const provider_id = String(faker.random.number());
+    const user_id = String(faker.random.number());
 
     const appointment1 = await fakeAppointmentsRepository.create({
       provider_id,
