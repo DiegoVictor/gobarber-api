@@ -2,6 +2,7 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import AppError from '@shared/errors/AppError';
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
+import factory from '../utils/factory';
 
 describe('UpdateUserAvatarService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -19,10 +20,11 @@ describe('UpdateUserAvatarService', () => {
   });
 
   it('should be able to create a new user', async () => {
+    const { email, password, name } = await factory.attrs('User');
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name,
+      email,
+      password,
     });
 
     const avatarFilename = 'avatar.jpg';
@@ -46,12 +48,13 @@ describe('UpdateUserAvatarService', () => {
   });
 
   it('should delete current avatar when updating a new one', async () => {
+    const { email, password, name } = await factory.attrs('User');
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
 
     const user = await fakeUsersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '79345794',
+      name,
+      email,
+      password,
     });
 
     const avatarFilename = 'avatar.jpg';
