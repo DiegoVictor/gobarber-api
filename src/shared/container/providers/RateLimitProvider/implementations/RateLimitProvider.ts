@@ -1,6 +1,8 @@
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 import redis from 'redis';
 
+import rateLimitConfiguration from '@config/rate_limit';
+
 export default class RateLimitProvider {
   private limiter: RateLimiterRedis;
 
@@ -13,8 +15,8 @@ export default class RateLimitProvider {
     this.limiter = new RateLimiterRedis({
       storeClient: redisClient,
       keyPrefix: 'ratelimit',
-      points: 5,
-      duration: 1,
+      points: rateLimitConfiguration.points,
+      duration: rateLimitConfiguration.duration,
     });
   }
 
