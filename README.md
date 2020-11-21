@@ -156,15 +156,18 @@ POST http://localhost:3333/appointments Authorization: Bearer <token>
 ## Routes
 |route|HTTP Method|pagination|params|description|auth method
 |:---|:---:|:---:|:---:|:---:|:---:
-|`/sessions`|POST|:x:|Body with NGO `id`.|Authenticates user, return a Bearer Token and ngo's id and name.|:x:
-|`/ngos`|GET|:heavy_check_mark:|`page` query parameter.|Lists NGOs.|:x:
-|`/ngos/:id`|GET|:x:|`:id` of the NGO.|Return one NGO.|:x:
-|`/ngos`|POST|:x:|Body with new NGO data.|Create a new NGO.|:x:
-|`/incidents`|GET|:heavy_check_mark:|`page` query parameter.|List incidents.|:x:
-|`/incidents/:id`|GET|:x:|`:id` of the incident.|Return one incident.|:x:
-|`/incidents`|POST|:x:|Body with new incident data.|Create new incidents.|Bearer
-|`/incidents/:id`|DELETE|:x:|`:id` of the incident.|Remove an incident.|Bearer
-|`/ngos/:ngo_id/incidents`|GET|:heavy_check_mark:|`page` query parameter and `:ngo_id` of the NGO.|List NGO's incidents.|:x:
+|`/sessions`|POST|:x:|Body with user's email and password.|Authenticates user, return a Bearer Token and user's id and email.|:x:
+|`/users`|POST|:x:|Body with user's email and password.|Create new users.|:x:
+|`/profile`|GET|:x:| - |Logged in user profile.|Bearer
+|`/profile`|PUT|:x:|Body with user `name`, `email`, `old_password`, `password` and `password_confirmation`.|Update user.|Bearer
+|`/users/avatar`|PATCH|:x:|Multipart payload with a `avatar` field with a image (See insomnia file for good example).|Update user avatar.|Bearer
+|`/appointments`|POST|:x:|Body with appointment `provider_id` and `date`.|Create a new appointment.|Bearer
+|`/appointments/schedule`|GET|:x:|`day`, `month` and `year` query parameters.|Return user's scheduled appointments in a specific date.|Bearer
+|`/providers`|GET|:heavy_check_mark:|`page` query parameter.|Lists providers.|Bearer
+|`/providers/:id/month_availability`|GET|:x:|`month` and `year` query parameters.|List month's days availability|Bearer
+|`/providers/:id/day_availability`|GET|:x:|`day`, `month` and `year` query parameters.|List a specific day availability.|Bearer
+|`/password/forgot`|POST|:x:|Body with user's `email`.|Send to user the reset password email.|:x:
+|`/password/reset`|POST|:x:|Body with user's new `password` and `password_confirmation`.|Reset user's password.|:x:
 
 > Routes with `Bearer` as auth method expect an `Authorization` header. See [Bearer Token](#bearer-token) section for more information.
 
@@ -174,31 +177,65 @@ POST http://localhost:3333/appointments Authorization: Bearer <token>
 Request body:
 ```json
 {
-  "id": "e5a76988"
+  "email": "johndoe@example.com",
+  "password": "123456"
 }
 ```
 
-* `POST /ngos`
+* `POST /users`
 
 Request body:
 ```json
 {
-  "name": "Doe and Sons",
-  "email": "johndoe@gmail.com",
-  "whatsapp": "39379976591",
-  "city": "Corinefurt",
-  "uf": "NE"
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "123456"
 }
 ```
 
-* `POST /incidents`
+* `PUT /profile`
 
 Request body:
 ```json
 {
-  "title": "Forward Tactics Representative",
-  "description": "Adipisci non assumenda ad sequi.",
-  "value": 512.93
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "old_password": "123456",
+  "password": "123456789",
+  "password_confirmation": "123456789"
+}
+```
+
+* `PATCH /users/avatar`
+Image file
+
+* `POST /appointments`
+
+Request body:
+```json
+{
+  "provider_id": "01931fee-32d4-4af7-b4e9-12159c5d703e",
+  "date": "2020-11-20 15:00:00"
+}
+```
+
+* `POST /password/forgot`
+
+Request body:
+```json
+{
+  "email": "johndoe@example.com"
+}
+```
+
+* `POST /password/reset`
+
+Request body:
+```json
+{
+  "password": "123456",
+  "password_confirmation": "123456",
+  "token": "6878f9b2-eb7c-4ad6-ac72-66d958f117c2"
 }
 ```
 
@@ -213,4 +250,4 @@ $ npm run test
 ```
 
 ## Coverage report
-You can see the coverage report inside `coverage`. They are automatically created after the tests run.
+You can see the coverage report inside `test/coverage`. They are automatically created after the tests run.
