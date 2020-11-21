@@ -207,6 +207,7 @@ Request body:
 ```
 
 * `PATCH /users/avatar`
+
 Image file
 
 * `POST /appointments`
