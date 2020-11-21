@@ -23,6 +23,9 @@ Responsible for provide data to the [`web`](https://github.com/DiegoVictor/gobar
     * [.env](#env)
     * [Rate Limit (Optional)](#rate-limit)
 * [Usage](#usage)
+  * [Pagination](#pagination)
+    * [Link Header](#link-header)
+    * [X-Total-Count](#x-total-count)
   * [Bearer Token](#bearer-token)
   * [Routes](#routes)
     * [Requests](#requests)
@@ -44,7 +47,7 @@ $ npm install
 The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/).
 
 ### Postgres
-Responsible to store all application data. To create a postgres container just run:
+Responsible to store almost all application data. To create a postgres container just run:
 ```
 $ docker run --name gobarber-postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
@@ -67,7 +70,7 @@ $ docker run --name gobarber-mongo -d -p 27017:27017 mongo
 ```
 
 ### Redis
-Responsible to store data utilized by the rate limit middleware and the application cache. To create a redis container:
+Responsible to store data utilized by the rate limit middleware and the application's cache. To create a redis container:
 ```
 $ docker run --name gobarber-redis -d -p 6379:6379 redis:alpine
 ```
@@ -97,12 +100,12 @@ In this file you may configure your Postgres, MongoDB and Redis database connect
 |REDIS_PASSWORD|Redis password.| -
 |STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
 
-> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
+> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Poastgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
 
 ### Rate Limit (Optional)
 The project comes pre-configured, but you can adjust it as your needs.
 
-* `src/config/rate_limit.js`
+* `src/config/rate_limit.ts`
 
 |key|description|default
 |---|---|---
@@ -121,15 +124,34 @@ Or:
 npm run dev:server
 ```
 
+## Pagination
+All the routes with pagination returns 30 records per page, to navigate to other pages just send the `page` query parameter with the number of the page.
+
+* To get the third page of providers:
+```
+GET http://localhost:3333/providers?page=3
+```
+
+### Link Header
+Also in the headers of every route with pagination the `Link` header is returned with links to `first`, `last`, `next` and `prev` (previous) page.
+```
+<http://localhost:3333/providers?page=7>; rel="last",
+<http://localhost:3333/providers?page=4>; rel="next",
+<http://localhost:3333/providers?page=1>; rel="first",
+<http://localhost:3333/providers?page=2>; rel="prev"
+```
+> See more about this header in this MDN doc: [Link - HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Link).
+
+### X-Total-Count
+Another header returned in routes with pagination, this bring the total records amount.
+
 ## Bearer Token
 A few routes expect a Bearer Token in an `Authorization` header.
 > You can see these routes in the [routes](#routes) section.
 ```
-GET http://localhost:3333/appointments/schedule Authorization: Bearer <token>
+POST http://localhost:3333/appointments Authorization: Bearer <token>
 ```
 > To achieve this token you just need authenticate through the `/sessions` route and it will return the `token` key with a valid Bearer Token.
-
-
 
 ## Routes
 |route|HTTP Method|pagination|params|description|auth method
