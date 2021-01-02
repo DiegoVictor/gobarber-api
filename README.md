@@ -100,7 +100,7 @@ In this file you may configure your Postgres, MongoDB and Redis database connect
 |REDIS_PASSWORD|Redis password.| -
 |STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
 
-> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Poastgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
+> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Postgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
 
 ### Rate Limit (Optional)
 The project comes pre-configured, but you can adjust it as your needs.
