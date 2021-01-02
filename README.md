@@ -44,7 +44,7 @@ $ npm install
 > Was installed and configured the [`eslint`](https://eslint.org/) and [`prettier`](https://prettier.io/) to keep the code clean and patterned.
 
 ## Configuring
-The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/).
+The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/). For the fastest setup is recommended to use [docker](https://www.docker.com/), see below how to setup ever database.
 
 ### Postgres
 Responsible to store almost all application data. To create a postgres container just run:
