@@ -9,7 +9,7 @@
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/gobarber-api?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/gobarber-api)
 [![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/DiegoVictor/gobarber-api/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Be%20The%20Hero&uri=https%3A%2F%2Fraw.githubusercontent.com%2FDiegoVictor%2Fbethehero%2Fmaster%2Fapi%2FInsomnia_2020-11-21.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GoBarber&uri=https%3A%2F%2Fraw.githubusercontent.com%2FDiegoVictor%2Fgobarber-api%2Fmaster%2FInsomnia_2020-11-21.json)
 
 Responsible for provide data to the [`web`](https://github.com/DiegoVictor/gobarber-web) and [`mobile`](https://github.com/DiegoVictor/gobarber-app) front-ends. Permit to register yourself as a provider or a customer, allows customers to see providers free days' hours availability and book with them a barber shop service and also notify by email providers when a book is created. Also the app has rate limit, uses JWT to logins and validation.
 
@@ -44,7 +44,7 @@ $ npm install
 > Was installed and configured the [`eslint`](https://eslint.org/) and [`prettier`](https://prettier.io/) to keep the code clean and patterned.
 
 ## Configuring
-The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/).
+The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/). For the fastest setup is recommended to use [docker](https://www.docker.com/), see below how to setup ever database.
 
 ### Postgres
 Responsible to store almost all application data. To create a postgres container just run:
@@ -100,7 +100,7 @@ In this file you may configure your Postgres, MongoDB and Redis database connect
 |REDIS_PASSWORD|Redis password.| -
 |STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
 
-> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Poastgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
+> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Postgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
 
 ### Rate Limit (Optional)
 The project comes pre-configured, but you can adjust it as your needs.
