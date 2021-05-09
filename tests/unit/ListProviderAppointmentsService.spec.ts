@@ -19,8 +19,8 @@ describe('ListProviderAppointmentsService', () => {
   });
 
   it('should be able to list the appointments on a specific day', async () => {
-    const provider_id = String(faker.random.number());
-    const user_id = String(faker.random.number());
+    const provider_id = String(faker.datatype.number());
+    const user_id = String(faker.datatype.number());
 
     const appointment1 = await fakeAppointmentsRepository.create({
       provider_id,
@@ -44,8 +44,8 @@ describe('ListProviderAppointmentsService', () => {
   });
 
   it('should be able to list the appointments on a specific day from cache', async () => {
-    const provider_id = String(faker.random.number());
-    const user_id = String(faker.random.number());
+    const provider_id = String(faker.datatype.number());
+    const user_id = String(faker.datatype.number());
 
     const appointment1 = await fakeAppointmentsRepository.create({
       provider_id,

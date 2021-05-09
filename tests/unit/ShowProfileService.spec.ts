@@ -30,7 +30,7 @@ describe('UpdateProfileService', () => {
 
   it('should not be able to show the profile from non existing user', async () => {
     await expect(
-      showProfile.execute({ user_id: String(faker.random.number()) }),
+      showProfile.execute({ user_id: String(faker.datatype.number()) }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

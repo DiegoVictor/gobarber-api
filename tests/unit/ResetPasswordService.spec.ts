@@ -37,7 +37,7 @@ describe('ResetPassowrd', () => {
 
     const generateHash = jest.spyOn(fakeHashProvider, 'generateHash');
 
-    const newPassword = String(faker.random.number());
+    const newPassword = String(faker.datatype.number());
     await resetPassword.execute({
       password: newPassword,
       token,
@@ -62,7 +62,7 @@ describe('ResetPassowrd', () => {
   });
 
   it('should not be able to reset a password with non existing user', async () => {
-    const id = String(faker.random.number());
+    const id = String(faker.datatype.number());
     const { token } = await fakeUserTokensRepository.generate(id);
     const password = faker.internet.password();
 

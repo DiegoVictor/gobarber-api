@@ -15,8 +15,8 @@ describe('ListProviderDayAvailabilityService', () => {
   });
 
   it('should be able to list the day availability from provider', async () => {
-    const provider_id = String(faker.random.number());
-    const user_id = String(faker.random.number());
+    const provider_id = String(faker.datatype.number());
+    const user_id = String(faker.datatype.number());
 
     await fakeAppointmentsRepository.create({
       provider_id,

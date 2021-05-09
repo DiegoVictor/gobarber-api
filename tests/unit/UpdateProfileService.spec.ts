@@ -122,7 +122,7 @@ describe('UpdateProfileService', () => {
     const { name, email } = await factory.attrs('User');
     await expect(
       updateProfile.execute({
-        user_id: String(faker.random.number()),
+        user_id: String(faker.datatype.number()),
         name,
         email,
       }),

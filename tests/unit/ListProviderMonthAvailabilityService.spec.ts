@@ -15,8 +15,8 @@ describe('ListProviderMonthAvailabilityService', () => {
   });
 
   it('should be able to list the month availability from provider', async () => {
-    const provider_id = String(faker.random.number());
-    const user_id = String(faker.random.number());
+    const provider_id = String(faker.datatype.number());
+    const user_id = String(faker.datatype.number());
 
     const appointments = [];
     for (let i = 8; i < 18; i++) {
