@@ -1,11 +1,11 @@
 # [API] GoBarber
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DiegoVictor/gobarber-api/CI?logo=github&style=flat-square)](https://github.com/DiegoVictor/gobarber-api/actions)
-[![postgres](https://img.shields.io/badge/postgres-8.2.1-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![mongo](https://img.shields.io/badge/mongodb-3.5.9-13aa52?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![redis](https://img.shields.io/badge/redis-3.0.2-d92b21?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
-[![eslint](https://img.shields.io/badge/eslint-6.8.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
+[![postgres](https://img.shields.io/badge/postgres-8.6.0-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![mongo](https://img.shields.io/badge/mongodb-4.0.1-13aa52?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![redis](https://img.shields.io/badge/redis-3.1.2-d92b21?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![eslint](https://img.shields.io/badge/eslint-7.31.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
 [![airbnb-style](https://flat.badgen.net/badge/style-guide/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
-[![jest](https://img.shields.io/badge/jest-26.1.0-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
+[![jest](https://img.shields.io/badge/jest-27.0.6-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/gobarber-api?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/gobarber-api)
 [![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/DiegoVictor/gobarber-api/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
