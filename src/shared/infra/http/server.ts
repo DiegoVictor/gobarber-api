@@ -11,8 +11,8 @@ import '@shared/container';
 import AppError from '@shared/errors/AppError';
 import uploadConfiguration from '@config/upload';
 import routes from './routes';
-import rateLimit from './middlewares/RateLimit';
-import routeAliases from './middlewares/RouteAliases';
+import rateLimit from './middlewares/rateLimit';
+import routeAliases from './middlewares/routeAliases';
 
 const app = express();
 

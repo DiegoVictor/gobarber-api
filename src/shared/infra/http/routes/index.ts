@@ -7,15 +7,15 @@ import sessionsRoutes from '@modules/users/infra/http/routes/sessions.routes';
 import passwordRoutes from '@modules/users/infra/http/routes/password.routes';
 import profileRoutes from '@modules/users/infra/http/routes/profile.routes';
 
-const routes = Router();
+const app = Router();
 
-routes.use('/sessions', sessionsRoutes);
+app.use('/sessions', sessionsRoutes);
 
-routes.use('/providers', providersRoutes);
-routes.use('/appointments', appointmentsRoutes);
-routes.use('/users', usersRoutes);
+app.use('/providers', providersRoutes);
+app.use('/appointments', appointmentsRoutes);
+app.use('/users', usersRoutes);
 
-routes.use('/password', passwordRoutes);
-routes.use('/profile', profileRoutes);
+app.use('/password', passwordRoutes);
+app.use('/profile', profileRoutes);
 
-export default routes;
+export default app;
