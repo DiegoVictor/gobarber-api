@@ -44,10 +44,13 @@ $ npm install
 > Was installed and configured the [`eslint`](https://eslint.org/) and [`prettier`](https://prettier.io/) to keep the code clean and patterned.
 
 ## Configuring
-The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/). For the fastest setup is recommended to use [docker](https://www.docker.com/), see below how to setup ever database.
+The application use three databases: [Postgres](https://www.postgresql.org/), [MongoDB](https://www.mongodb.com/) and [Redis](https://redis.io/). For the fastest setup is recommended to use [docker-compose](https://docs.docker.com/compose/), you just need to up all services:
+```
+$ docker-compose up -d
+```
 
 ### Postgres
-Responsible to store almost all application data. To create a postgres container just run:
+Responsible to store almost all application data. If for any reason you would like to create a Postgres container instead of use `docker-compose`, you can do it by running the following command:
 ```
 $ docker run --name gobarber-postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
@@ -64,13 +67,13 @@ $ yarn typeorm migration:run
 > See more information on [TypeORM Migrations](https://typeorm.io/#/migrations).
 
 ### MongoDB
-Store application's notifications. You can create a MongoDB container like so:
+Store application's notifications. If for any reason you would like to create a MongoDB container instead of use `docker-compose`, you can do it by running the following command:
 ```
 $ docker run --name gobarber-mongo -d -p 27017:27017 mongo
 ```
 
 ### Redis
-Responsible to store data utilized by the rate limit middleware and the application's cache. To create a redis container:
+Responsible to store data utilized by the rate limit middleware and the application's cache. If for any reason you would like to create a MongoDB container instead of use `docker-compose`, you can do it by running the following command:
 ```
 $ docker run --name gobarber-redis -d -p 6379:6379 redis:alpine
 ```
@@ -87,20 +90,18 @@ In this file you may configure your Postgres, MongoDB and Redis database connect
 |AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY|These keys are necessary to AWS allow the application to use the S3 and SES services throught API. See how to get yours keys here: [Set up AWS Credentials](https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html)| -
 |AWS_DEFAULT_REGION|You can see your default region in the navigation bar at the top right after login in the [AWS Management Console](https://sa-east-1.console.aws.amazon.com/console/home). Read [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) to know more about regions.| -
 |AWS_S3_BUCKET_NAME|Amazon S3 stores data as objects within buckets. To create a bucket see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)|gobarber
-|POSTGRES_HOST| Postgres host.|`127.0.0.1`
+|POSTGRES_HOST| Postgres host.|`pg`
 |POSTGRES_PORT| Postgres port.|`5432`
 |POSTGRES_USERNAME| Postgres user.|`postgres`
 |POSTGRES_PASSWORD| Postgres password.| -
 |POSTGRES_DATABASE| Application's database name.|gobarber
-|MONGO_HOST|MongoDB host.|`127.0.0.1`
+|MONGO_HOST|MongoDB host.|`mongo`
 |MONGO_PORT|MongoDB port.|`27017`
 |MONGO_DATABASE|MongoDB database name.|gobarber
-|REDIS_HOST|Redis host.|`127.0.0.1`
+|REDIS_HOST|Redis host.|`redis`
 |REDIS_PORT|Redis port.|`6379`
 |REDIS_PASSWORD|Redis password.| -
 |STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
-
-> For Windows users using Docker Toolbox maybe be necessary in your `.env` file set the host of the Postgres, MongoDB and Redis to `192.168.99.100` (docker machine IP) instead of `localhost` or `127.0.0.1`.
 
 ### Rate Limit (Optional)
 The project comes pre-configured, but you can adjust it as your needs.
