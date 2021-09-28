@@ -20,6 +20,6 @@ export default class UsersControllers {
       updated_at: user.updated_at,
     };
 
-    return response.json(classToClass(userSerialized));
+    return response.status(201).json(classToClass(userSerialized));
   }
 }
