@@ -15,10 +15,10 @@ routes.use(ensureAuthenticated);
 
 routes.get('/', providersController.index);
 routes.get(
-  '/:provider_id/month_availability',
+  '/:id/month_availability',
   celebrate({
     [Segments.PARAMS]: {
-      provider_id: Joi.string().uuid().required(),
+      id: Joi.string().uuid().required(),
     },
   }),
   providerMonthAvailabilityController.index,
