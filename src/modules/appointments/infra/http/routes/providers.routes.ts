@@ -24,10 +24,10 @@ routes.get(
   providerMonthAvailabilityController.index,
 );
 routes.get(
-  '/:provider_id/day_availability',
+  '/:id/day_availability',
   celebrate({
     [Segments.PARAMS]: {
-      provider_id: Joi.string().uuid().required(),
+      id: Joi.string().uuid().required(),
     },
   }),
   providerDayAvailabilityController.index,
