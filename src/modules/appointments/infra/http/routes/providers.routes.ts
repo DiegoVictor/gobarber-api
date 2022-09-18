@@ -20,6 +20,10 @@ routes.get(
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
+    [Segments.QUERY]: {
+      month: Joi.number().required(),
+      year: Joi.number().required(),
+    },
   }),
   providerMonthAvailabilityController.index,
 );
