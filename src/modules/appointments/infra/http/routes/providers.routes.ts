@@ -13,7 +13,15 @@ const providerDayAvailabilityController = new ProviderDayAvailabilityController(
 
 routes.use(ensureAuthenticated);
 
-routes.get('/', providersController.index);
+routes.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      page: Joi.number().optional(),
+    },
+  }),
+  providersController.index,
+);
 routes.get(
   '/:id/month_availability',
   celebrate({
