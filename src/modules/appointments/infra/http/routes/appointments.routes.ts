@@ -11,6 +11,17 @@ const providerAppointmentsController = new ProviderAppointmentsController();
 
 routes.use(ensureAuthenticated);
 
+routes.get(
+  '/schedule',
+  celebrate({
+    [Segments.QUERY]: {
+      day: Joi.number().required(),
+      month: Joi.number().required(),
+      year: Joi.number().required(),
+    },
+  }),
+  providerAppointmentsController.index,
+);
 routes.post(
   '/',
   celebrate({
@@ -21,6 +32,5 @@ routes.post(
   }),
   appointmentsController.create,
 );
-routes.get('/schedule', providerAppointmentsController.index);
 
 export default routes;
