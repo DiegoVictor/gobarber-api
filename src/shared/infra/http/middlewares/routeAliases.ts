@@ -6,10 +6,10 @@ export default (
   next: NextFunction,
 ): void => {
   const { protocol, hostname, originalUrl } = request;
-  const host_url = `${protocol}://${hostname}:${process.env.APP_PORT}`;
+  const hostUrl = `${protocol}://${hostname}:${process.env.APP_PORT}`;
 
-  request.hostUrl = host_url;
-  request.currentUrl = `${host_url + originalUrl.split('?').shift()}`;
+  request.hostUrl = hostUrl;
+  request.currentUrl = `${hostUrl + originalUrl.split('?').shift()}`;
 
   next();
 };
