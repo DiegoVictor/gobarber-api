@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: '16.x'
       - uses: actions/checkout@v2
-      - name: Run coverage
+      - name: Run tests
         run: |
           npm ci
           npm run test
