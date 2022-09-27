@@ -7,7 +7,7 @@ factory.define(
   {
     email: faker.internet.email,
     password: faker.internet.password,
-    name: faker.name.findName,
+    name: faker.name.fullName,
   },
 );
 
