@@ -1,0 +1,16 @@
+{
+  "openapi":"3.0.2",
+  "info": {
+    "title":"GoBarber",
+    "version":"1.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/DiegoVictor/gobarber-api/master/LICENSE"
+    }
+  },
+  "servers": [
+    {
+      "url":"http://localhost:3333"
+    }
+  ],
+}
