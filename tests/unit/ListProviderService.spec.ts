@@ -24,7 +24,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to list the providers', async () => {
-    const [user1, user2, user3] = await factory.attrsMany('User', 3);
+    const [user1, user2, user3] = await factory.attrsMany<User>('User', 3);
     const provider1 = await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -53,7 +53,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to list the providers from cache', async () => {
-    const [user1, ...users] = await factory.attrsMany('User', 3);
+    const [user1, ...users] = await factory.attrsMany<User>('User', 3);
 
     const promises: Promise<User>[] = [];
     users.forEach(user => {

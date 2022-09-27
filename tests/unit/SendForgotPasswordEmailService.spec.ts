@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
 import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('SendForgotPasswordEmail', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -24,7 +25,7 @@ describe('SendForgotPasswordEmail', () => {
   });
 
   it('should be able to recover your password using your email', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     await fakeUsersRepository.create({
       name,
       email,
@@ -41,7 +42,7 @@ describe('SendForgotPasswordEmail', () => {
   });
 
   it('should not be able to recover a non existing user password', async () => {
-    const { email } = await factory.attrs('User');
+    const { email } = await factory.attrs<User>('User');
     await expect(
       sendForgotPasswordEmail.execute({
         email,
@@ -50,7 +51,7 @@ describe('SendForgotPasswordEmail', () => {
   });
 
   it('should generate a forgot password token', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const user = await fakeUsersRepository.create({
       name,
       email,

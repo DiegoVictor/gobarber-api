@@ -5,6 +5,7 @@ import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHa
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('AuthenticateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -22,7 +23,7 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should be able to authenticate', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
 
     const user = await fakeUsersRepository.create({
       name,
@@ -40,7 +41,7 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate with non existing user', async () => {
-    const { email, password } = await factory.attrs('User');
+    const { email, password } = await factory.attrs<User>('User');
     await expect(
       authenticateUser.execute({
         email,
@@ -50,7 +51,7 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate with wrong password', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const newPassword = faker.internet.password();
 
     await fakeUsersRepository.create({

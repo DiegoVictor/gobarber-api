@@ -4,6 +4,7 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import AppError from '@shared/errors/AppError';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -15,7 +16,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to show the profile', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const user = await fakeUsersRepository.create({
       name,
       email,

@@ -6,6 +6,7 @@ import AppError from '@shared/errors/AppError';
 import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('ResetPassowrd', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -26,7 +27,7 @@ describe('ResetPassowrd', () => {
   });
 
   it('should be able to reset the password', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const user = await fakeUsersRepository.create({
       name,
       email,
@@ -75,7 +76,7 @@ describe('ResetPassowrd', () => {
   });
 
   it('should not be able to reset the password if it expires', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const user = await fakeUsersRepository.create({
       name,
       email,

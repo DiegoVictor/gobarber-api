@@ -5,6 +5,7 @@ import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('UpdateProfileService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -22,7 +23,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to update the profile', async () => {
-    const [user1, user2] = await factory.attrsMany('User', 2);
+    const [user1, user2] = await factory.attrsMany<User>('User', 2);
     const user = await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -40,7 +41,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should not be able to change to another user email', async () => {
-    const [user1, user2] = await factory.attrsMany('User', 2);
+    const [user1, user2] = await factory.attrsMany<User>('User', 2);
     await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -63,7 +64,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should be able to update the password', async () => {
-    const [user1, user2] = await factory.attrsMany('User', 2);
+    const [user1, user2] = await factory.attrsMany<User>('User', 2);
     const user = await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -82,7 +83,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should not be able to update the password without old password', async () => {
-    const [user1, user2] = await factory.attrsMany('User', 2);
+    const [user1, user2] = await factory.attrsMany<User>('User', 2);
     const user = await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -100,7 +101,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should not be able to update the password with wrong password', async () => {
-    const [user1, user2] = await factory.attrsMany('User', 2);
+    const [user1, user2] = await factory.attrsMany<User>('User', 2);
     const user = await fakeUsersRepository.create({
       name: user1.name,
       email: user1.email,
@@ -119,7 +120,7 @@ describe('UpdateProfileService', () => {
   });
 
   it('should not be able to update the profile from non existing user', async () => {
-    const { name, email } = await factory.attrs('User');
+    const { name, email } = await factory.attrs<User>('User');
     await expect(
       updateProfile.execute({
         user_id: String(faker.datatype.number()),

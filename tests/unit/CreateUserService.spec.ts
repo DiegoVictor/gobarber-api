@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import factory from '../utils/factory';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 describe('CreateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository;
@@ -24,7 +25,7 @@ describe('CreateUserService', () => {
   });
 
   it('should be able to create a new user', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
     const user = await createUser.execute({
       name,
       email,
@@ -35,7 +36,7 @@ describe('CreateUserService', () => {
   });
 
   it('should not be able to create a new user with an email already in use ', async () => {
-    const { email, password, name } = await factory.attrs('User');
+    const { email, password, name } = await factory.attrs<User>('User');
 
     await createUser.execute({
       name,
