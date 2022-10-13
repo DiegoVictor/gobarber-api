@@ -13,4 +13,29 @@
       "url":"http://localhost:3333"
     }
   ],
+  "paths": {
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+    },
+  }
 }
