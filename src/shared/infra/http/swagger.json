@@ -14,6 +14,82 @@
     }
   ],
   "paths": {
+    "/sessions": {
+      "post": {
+        "tags": ["Sessions"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "User",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "johndoe@example.com",
+                "password": "123456"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authenticates user, return a Bearer Token and user's id and email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/User"
+                        },
+                        {
+                          "title": "User",
+                          "properties": {
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "avatar_url": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "user": {
+                    "id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                    "name": "John Doe",
+                    "email": "johndoe@example.com",
+                    "created_at": "2021-09-28T00:38:52.889Z",
+                    "updated_at": "2021-09-28T00:38:52.889Z",
+                    "avatar": null,
+                    "avatar_url": null
+                  },
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzI3Nzg4ODEsImV4cCI6MTYzMjg2NTI4MSwic3ViIjoiYzIyODI5ZmEtYWRhNS00MWM0LTgyNzUtMmQyZTg2NjhkYjYzIn0.y58g59xzvhZ_u9bDJKD4r5bSYN-rnNfdECwdinSBPes"
+                }
+              }
+            }
+          },
   },
   "components": {
     "schemas": {
