@@ -129,6 +129,16 @@
           }
         }
       },
+      "Error": {
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
     },
   }
 }
