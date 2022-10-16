@@ -140,5 +140,11 @@
         }
       }
     },
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
   }
 }
