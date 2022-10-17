@@ -175,6 +175,80 @@
         }
       }
     },
+    "/users/avatar": {
+      "patch": {
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "avatar"
+                ],
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update user avatar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "title": "User",
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                  "name": "John Doe",
+                  "email": "johndoe@example.com",
+                  "avatar": "cfe492d1a0aabedb151d-15165349.png",
+                  "created_at": "2021-09-28T00:38:52.889Z",
+                  "updated_at": "2021-09-28T00:53:49.894Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Only authenticated users can change avatar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "Only authenticated users can change avatar"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
