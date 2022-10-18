@@ -295,6 +295,75 @@
         }
       }
     },
+    "/password/reset": {
+      "post": {
+        "tags": ["Password"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password",
+                  "password_confirmation",
+                  "token"
+                ],
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "password": "123456",
+                "password_confirmation": "123456",
+                "token": "a07b30e8-7f5b-4b46-a41f-82cb41b484c9"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Reset user's password"
+          },
+          "400": {
+            "description": "User not exists or the token is expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "User token does not exists": {
+                    "value": {
+                      "status": "error",
+                      "message": "User token does not exists"
+                    }
+                  },
+                  "Token exired": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
