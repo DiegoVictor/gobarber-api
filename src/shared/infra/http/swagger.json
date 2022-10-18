@@ -249,6 +249,52 @@
         }
       }
     },
+    "/password/forgot": {
+      "post": {
+        "tags": ["Password"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "johndoe@example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Send to user the reset password email"
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User does not exists"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
