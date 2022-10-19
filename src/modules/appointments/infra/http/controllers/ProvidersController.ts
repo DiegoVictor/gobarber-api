@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { classToClass } from 'class-transformer';
+import { instanceToInstance } from 'class-transformer';
 
 import ListProviderService from '@modules/appointments/services/ListProviderService';
 import CountProvidersService from '@modules/appointments/services/CountProvidersService';
@@ -39,6 +39,6 @@ export default class ProvidersController {
       response.links(PaginationLinks(page, pagesTotal, currentUrl));
     }
 
-    return response.json(classToClass(providers));
+    return response.json(instanceToInstance(providers));
   }
 }

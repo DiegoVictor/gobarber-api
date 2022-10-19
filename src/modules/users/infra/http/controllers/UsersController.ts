@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { classToClass } from 'class-transformer';
+import { instanceToInstance } from 'class-transformer';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 
@@ -20,6 +20,6 @@ export default class UsersControllers {
       updated_at: user.updated_at,
     };
 
-    return response.status(201).json(classToClass(userSerialized));
+    return response.status(201).json(instanceToInstance(userSerialized));
   }
 }

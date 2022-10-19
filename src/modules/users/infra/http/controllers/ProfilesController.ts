@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { classToClass } from 'class-transformer';
+import { instanceToInstance } from 'class-transformer';
 
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 import ShowProfileService from '@modules/users/services/ShowProfileService';
@@ -21,7 +21,7 @@ export default class ProfilesController {
       updated_at: user.updated_at,
     };
 
-    return response.json(classToClass(userSerialized));
+    return response.json(instanceToInstance(userSerialized));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -37,6 +37,6 @@ export default class ProfilesController {
       password,
     });
 
-    return response.json(classToClass(user));
+    return response.json(instanceToInstance(user));
   }
 }
