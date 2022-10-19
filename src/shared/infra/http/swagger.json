@@ -364,6 +364,62 @@
         }
       }
     },
+    "/profile": {
+      "get": {
+        "tags": ["Profile"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged in user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "title": "User",
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                  "name": "John Doe",
+                  "email": "johndoe@example.com",
+                  "created_at": "2021-09-28T00:38:52.889Z",
+                  "updated_at": "2021-09-28T01:32:06.236Z",
+                  "avatar": "1d92dbc7396e6e8b3b84-15165349.png"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User not found"
+                }
+              }
+            }
+          }
+        }
+      },
+    },
   },
   "components": {
     "schemas": {
