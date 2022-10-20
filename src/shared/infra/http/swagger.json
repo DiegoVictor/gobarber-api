@@ -552,6 +552,28 @@
           }
         }
       },
+      "Appointment": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "provider_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
       "Error": {
         "properties": {
           "status": {
