@@ -419,6 +419,116 @@
           }
         }
       },
+      "put": {
+        "tags": ["Profile"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "old_password": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "password_confirmation": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "old_password": "123456",
+                "password": "123456789",
+                "password_confirmation": "123456789"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "title": "User",
+                      "properties": {
+                        "avatar": {
+                          "type": "string"
+                        },
+                        "avatar_url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                  "name": "John Doe",
+                  "email": "johndoe@example.com",
+                  "created_at": "2021-09-28T00:38:52.889Z",
+                  "updated_at": "2021-09-28T01:49:34.139Z",
+                  "avatar": "1d92dbc7396e6e8b3b84-15165349.png",
+                  "avatar_url": "http://127.0.0.1:3333/uploads/1d92dbc7396e6e8b3b84-15165349.png"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error while trying to update your profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "You need to inform the old password to set a new one": {
+                    "value": {
+                      "status": "error",
+                      "message": "You need to inform the old password to set a new one"
+                    }
+                  },
+                  "Old password does not match": {
+                    "value": {
+                      "status": "error",
+                      "message": "Old password does not match"
+                    }
+                  },
+                  "User not found": {
+                    "value": {
+                      "status": "error",
+                      "message": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
   },
   "components": {
