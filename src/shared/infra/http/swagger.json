@@ -621,6 +621,106 @@
         }
       }
     },
+    "/appointments/schedule": {
+      "get": {
+        "tags": ["Appointments"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "day",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 27
+          },
+          {
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 9
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 2021
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return user's scheduled appointments in a specific date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Appointment"
+                      },
+                      {
+                        "title": "Appointment",
+                        "properties": {
+                          "user": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/User"
+                              },
+                              {
+                                "title": "User",
+                                "properties": {
+                                  "avatar": {
+                                    "type": "string"
+                                  },
+                                  "avatar_url": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "id": "11518123-a2f2-405f-b0c5-b63a06ebe344",
+                    "provider_id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                    "user_id": "cda84109-502d-45b0-ab22-83779832ef95",
+                    "date": "2021-11-20T18:00:00.000Z",
+                    "created_at": "2021-09-28T02:03:48.638Z",
+                    "updated_at": "2021-09-28T02:03:48.638Z",
+                    "user": {
+                      "id": "cda84109-502d-45b0-ab22-83779832ef95",
+                      "name": "Jane Doe",
+                      "email": "janedoe@example.com",
+                      "created_at": "2021-09-28T02:02:15.079Z",
+                      "updated_at": "2021-09-28T02:02:15.079Z",
+                      "avatar": null,
+                      "avatar_url": null
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
