@@ -530,6 +530,97 @@
         }
       }
     },
+    "/appointments": {
+      "post": {
+        "tags": ["Appointments"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "provider_id",
+                  "date"
+                ],
+                "properties": {
+                  "provider_id": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "provider_id": "cda84109-502d-45b0-ab22-83779832ef95",
+                "date": "2021-09-27 15:00:00"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create a new appointment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                },
+                "example": {
+                  "id": "1c5b9d85-69a3-4fdf-b1dc-f4d98331cbaa",
+                  "provider_id": "cda84109-502d-45b0-ab22-83779832ef95",
+                  "user_id": "c22829fa-ada5-41c4-8275-2d2e8668db63",
+                  "date": "2021-09-28T18:00:00.000Z",
+                  "created_at": "2021-09-28T02:16:35.755Z",
+                  "updated_at": "2021-09-28T02:16:35.755Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Errors while creating an appointment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "You can't create an appointment with yourself": {
+                    "value": {
+                      "status": "error",
+                      "message": "You can't create an appointment with yourself"
+                    }
+                  },
+                  "You can't create an appointment on a past date": {
+                    "value": {
+                      "status": "error",
+                      "message": "You can't create an appointment on a past date"
+                    }
+                  },
+                  "You can only create appointments between 8am and 5pm": {
+                    "value": {
+                      "status": "error",
+                      "message": "You can only create appointments between 8am and 5pm"
+                    }
+                  },
+                  "This appointment is already booked": {
+                    "value": {
+                      "status": "error",
+                      "message": "This appointment is already booked"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
