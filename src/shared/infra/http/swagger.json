@@ -721,6 +721,82 @@
         }
       }
     },
+    "/providers": {
+      "get": {
+        "tags": ["Providers"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "title": "User",
+                        "properties": {
+                          "avatar": {
+                            "type": "string"
+                          },
+                          "avatar_url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "id": "cda84109-502d-45b0-ab22-83779832ef95",
+                    "name": "Jane Doe",
+                    "email": "janedoe@example.com",
+                    "created_at": "2021-09-28T02:02:15.079Z",
+                    "updated_at": "2021-09-28T02:02:15.079Z",
+                    "avatar": null,
+                    "avatar_url": null
+                  }
+                ]
+              }
+            },
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of registries in the database",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "Link": {
+                "description": "Next, Previous, First and Last page's urls",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
