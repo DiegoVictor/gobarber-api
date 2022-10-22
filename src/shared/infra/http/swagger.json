@@ -973,6 +973,111 @@
         }
       }
     },
+    "/providers/{id}/day_availability": {
+      "get": {
+        "tags": ["Providers"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "c22829fa-ada5-41c4-8275-2d2e8668db63"
+          },
+          {
+            "in": "query",
+            "name": "day",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 27
+          },
+          {
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 9
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 2021
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List a specific day availability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HourAvailability"
+                  }
+                },
+                "example": [
+                  {
+                    "hour": 8,
+                    "available": false
+                  },
+                  {
+                    "hour": 9,
+                    "available": false
+                  },
+                  {
+                    "hour": 10,
+                    "available": false
+                  },
+                  {
+                    "hour": 11,
+                    "available": false
+                  },
+                  {
+                    "hour": 12,
+                    "available": false
+                  },
+                  {
+                    "hour": 13,
+                    "available": false
+                  },
+                  {
+                    "hour": 14,
+                    "available": false
+                  },
+                  {
+                    "hour": 15,
+                    "available": false
+                  },
+                  {
+                    "hour": 16,
+                    "available": false
+                  },
+                  {
+                    "hour": 17,
+                    "available": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "components": {
     "schemas": {
