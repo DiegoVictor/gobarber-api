@@ -1027,6 +1027,16 @@
           }
         }
       },
+      "HourAvailability": {
+        "properties": {
+          "hour": {
+            "type": "integer"
+          },
+          "available": {
+            "type": "boolean"
+          }
+        }
+      },
       "Error": {
         "properties": {
           "status": {
