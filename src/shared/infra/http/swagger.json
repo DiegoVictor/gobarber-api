@@ -797,6 +797,182 @@
         }
       }
     },
+    "/providers/{id}/month_availability": {
+      "get": {
+        "tags": ["Providers"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "c22829fa-ada5-41c4-8275-2d2e8668db63"
+          },
+          {
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 9
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 2021
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List month's days availability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DayAvailability"
+                  }
+                },
+                "example": [
+                  {
+                    "day": 1,
+                    "available": false
+                  },
+                  {
+                    "day": 2,
+                    "available": false
+                  },
+                  {
+                    "day": 3,
+                    "available": false
+                  },
+                  {
+                    "day": 4,
+                    "available": false
+                  },
+                  {
+                    "day": 5,
+                    "available": false
+                  },
+                  {
+                    "day": 6,
+                    "available": false
+                  },
+                  {
+                    "day": 7,
+                    "available": false
+                  },
+                  {
+                    "day": 8,
+                    "available": false
+                  },
+                  {
+                    "day": 9,
+                    "available": false
+                  },
+                  {
+                    "day": 10,
+                    "available": false
+                  },
+                  {
+                    "day": 11,
+                    "available": false
+                  },
+                  {
+                    "day": 12,
+                    "available": false
+                  },
+                  {
+                    "day": 13,
+                    "available": false
+                  },
+                  {
+                    "day": 14,
+                    "available": false
+                  },
+                  {
+                    "day": 15,
+                    "available": false
+                  },
+                  {
+                    "day": 16,
+                    "available": false
+                  },
+                  {
+                    "day": 17,
+                    "available": false
+                  },
+                  {
+                    "day": 18,
+                    "available": false
+                  },
+                  {
+                    "day": 19,
+                    "available": false
+                  },
+                  {
+                    "day": 20,
+                    "available": false
+                  },
+                  {
+                    "day": 21,
+                    "available": false
+                  },
+                  {
+                    "day": 22,
+                    "available": false
+                  },
+                  {
+                    "day": 23,
+                    "available": false
+                  },
+                  {
+                    "day": 24,
+                    "available": false
+                  },
+                  {
+                    "day": 25,
+                    "available": false
+                  },
+                  {
+                    "day": 26,
+                    "available": false
+                  },
+                  {
+                    "day": 27,
+                    "available": true
+                  },
+                  {
+                    "day": 28,
+                    "available": true
+                  },
+                  {
+                    "day": 29,
+                    "available": true
+                  },
+                  {
+                    "day": 30,
+                    "available": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
   },
   "components": {
     "schemas": {
