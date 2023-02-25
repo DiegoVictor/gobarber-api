@@ -1,5 +1,5 @@
 # [API] GoBarber
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DiegoVictor/gobarber-api/main.yml?logo=github&style=flat-square)](https://github.com/DiegoVictor/gobarber-api/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DiegoVictor/gobarber-api/config.yml?logo=github&style=flat-square)](https://github.com/DiegoVictor/gobarber-api/actions)
 [![typescript](https://img.shields.io/badge/typescript-4.8.4-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![postgres](https://img.shields.io/badge/postgres-8.8.0-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![mongo](https://img.shields.io/badge/mongodb-4.10.0-13aa52?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
