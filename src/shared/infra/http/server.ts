@@ -5,7 +5,6 @@ import 'express-async-errors';
 import cors from 'cors';
 import helmet from 'helmet';
 import { errors } from 'celebrate';
-import swagger from 'swagger-ui-express';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
@@ -14,7 +13,6 @@ import uploadConfiguration from '@config/upload';
 import routes from './routes';
 import rateLimit from './middlewares/rateLimit';
 import routeAliases from './middlewares/routeAliases';
-import swaggerDocument from './swagger.json';
 
 const app = express();
 
@@ -24,7 +22,6 @@ app.use(express.json());
 app.use('/uploads', express.static(uploadConfiguration.uploadsDirectory));
 app.use(rateLimit);
 app.use(routeAliases);
-app.use('/docs', swagger.serve, swagger.setup(swaggerDocument));
 app.use(routes);
 
 app.use(errors());
