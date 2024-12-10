@@ -10,7 +10,7 @@
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/gobarber-api?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/gobarber-api)
 [![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://raw.githubusercontent.com/DiegoVictor/gobarber-api/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GoBarber&uri=https%3A%2F%2Fraw.githubusercontent.com%2FDiegoVictor%2Fgobarber-api%2Fmaster%2FInsomnia_2021-09-27.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GoBarber&uri=https%3A%2F%2Fraw.githubusercontent.com%2FDiegoVictor%2Fgobarber-api%2Fmaster%2FInsomnia_2024-12-10.json)
 
 Responsible for provide data to the [`web`](https://github.com/DiegoVictor/gobarber-web) and [`mobile`](https://github.com/DiegoVictor/gobarber-app) front-ends. Permit to register yourself as a provider or a customer, allows customers to see providers free days' hours availability and book with them a barber shop service and also notify by email providers when a book is created. Also the app has rate limit, uses JWT to logins and validation.
 
