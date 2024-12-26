@@ -1,9 +1,9 @@
 # [API] GoBarber
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/DiegoVictor/gobarber-api/config.yml?logo=github&style=flat-square)](https://github.com/DiegoVictor/gobarber-api/actions)
-[![typescript](https://img.shields.io/badge/typescript-4.8.4-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![postgres](https://img.shields.io/badge/postgres-8.8.0-326690?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![mongo](https://img.shields.io/badge/mongodb-4.10.0-13aa52?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![redis](https://img.shields.io/badge/redis-4.3.1-d92b21?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![typescript](https://img.shields.io/badge/typescript-4.8.4-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![eslint](https://img.shields.io/badge/eslint-8.25.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
 [![airbnb-style](https://flat.badgen.net/badge/style-guide/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 [![jest](https://img.shields.io/badge/jest-29.2.0-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
