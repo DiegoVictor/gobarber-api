@@ -17,11 +17,11 @@ Responsible for provide data to the [`web`](https://github.com/DiegoVictor/gobar
 ## Table of Contents
 * [Installing](#installing)
   * [Configuring](#configuring)
+    * [.env](#env)
     * [Postgres](#postgres)
       * [Migrations](#migrations)
     * [MongoDB](#mongodb)
     * [Redis](#redis)
-    * [.env](#env)
     * [Rate Limit (Optional)](#rate-limit)
 * [Usage](#usage)
   * [Pagination](#pagination)
@@ -49,6 +49,31 @@ The application use three databases: [Postgres](https://www.postgresql.org/), [M
 ```
 $ docker-compose up -d
 ```
+
+### .env
+In this file you may configure your Postgres, MongoDB and Redis database connection, JWT settings, email and storage driver and app's urls. Rename the `.env.example` in the root directory to `.env` then just update with your settings.
+
+|key|description|default
+|---|---|---
+|APP_API_URL|Used to mount avatars' urls.|`http://127.0.0.1:3333`
+|APP_WEB_URL|Used to create the reset password link (front-end) sent in the recover password email.|`http://127.0.0.1:3000`
+|APP_SECRET|A alphanumeric random string. Used to create signed tokens.| -
+|MAIL_DRIVER|Indicate what email service use to send messages, the possible values are `ethereal` and `ses`, to use the [SES](https://aws.amazon.com/ses/) service remember to to configure the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_DEFAULT_REGION` keys.|`ethereal`
+|AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY|These keys are necessary to AWS allow the application to use the S3 and SES services throught API. See how to get yours keys here: [Set up AWS Credentials](https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html)| -
+|AWS_DEFAULT_REGION|You can see your default region in the navigation bar at the top right after login in the [AWS Management Console](https://sa-east-1.console.aws.amazon.com/console/home). Read [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) to know more about regions.| -
+|AWS_S3_BUCKET_NAME|Amazon S3 stores data as objects within buckets. To create a bucket see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)|gobarber
+|POSTGRES_HOST| Postgres host.|`pg`
+|POSTGRES_PORT| Postgres port.|`5432`
+|POSTGRES_USERNAME| Postgres user.|`postgres`
+|POSTGRES_PASSWORD| Postgres password.| -
+|POSTGRES_DATABASE| Application's database name.|gobarber
+|MONGO_HOST|MongoDB host.|`mongo`
+|MONGO_PORT|MongoDB port.|`27017`
+|MONGO_DATABASE|MongoDB database name.|gobarber
+|REDIS_HOST|Redis host.|`redis`
+|REDIS_PORT|Redis port.|`6379`
+|REDIS_PASSWORD|Redis password.| -
+|STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
 
 ### Postgres
 Responsible to store almost all application data. If for any reason you would like to create a Postgres container instead of use `docker-compose`, you can do it by running the following command:
@@ -78,31 +103,6 @@ Responsible to store data utilized by the rate limit middleware and the applicat
 ```
 $ docker run --name gobarber-redis -d -p 6379:6379 redis:alpine
 ```
-
-### .env
-In this file you may configure your Postgres, MongoDB and Redis database connection, JWT settings, email and storage driver and app's urls. Rename the `.env.example` in the root directory to `.env` then just update with your settings.
-
-|key|description|default
-|---|---|---
-|APP_API_URL|Used to mount avatars' urls.|`http://127.0.0.1:3333`
-|APP_WEB_URL|Used to create the reset password link (front-end) sent in the recover password email.|`http://127.0.0.1:3000`
-|APP_SECRET|A alphanumeric random string. Used to create signed tokens.| -
-|MAIL_DRIVER|Indicate what email service use to send messages, the possible values are `ethereal` and `ses`, to use the [SES](https://aws.amazon.com/ses/) service remember to to configure the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_DEFAULT_REGION` keys.|`ethereal`
-|AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY|These keys are necessary to AWS allow the application to use the S3 and SES services throught API. See how to get yours keys here: [Set up AWS Credentials](https://docs.aws.amazon.com/toolkit-for-eclipse/v1/user-guide/setup-credentials.html)| -
-|AWS_DEFAULT_REGION|You can see your default region in the navigation bar at the top right after login in the [AWS Management Console](https://sa-east-1.console.aws.amazon.com/console/home). Read [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) to know more about regions.| -
-|AWS_S3_BUCKET_NAME|Amazon S3 stores data as objects within buckets. To create a bucket see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)|gobarber
-|POSTGRES_HOST| Postgres host.|`pg`
-|POSTGRES_PORT| Postgres port.|`5432`
-|POSTGRES_USERNAME| Postgres user.|`postgres`
-|POSTGRES_PASSWORD| Postgres password.| -
-|POSTGRES_DATABASE| Application's database name.|gobarber
-|MONGO_HOST|MongoDB host.|`mongo`
-|MONGO_PORT|MongoDB port.|`27017`
-|MONGO_DATABASE|MongoDB database name.|gobarber
-|REDIS_HOST|Redis host.|`redis`
-|REDIS_PORT|Redis port.|`6379`
-|REDIS_PASSWORD|Redis password.| -
-|STORAGE_DRIVER|Indicate where the users's avatar will be stored, the possible values are `disk` and `s3`, to store into [S3](https://aws.amazon.com/s3/) remember to configure all the `AWS_*` keys.|`disk`
 
 ### Rate Limit (Optional)
 The project comes pre-configured, but you can adjust it as your needs.
